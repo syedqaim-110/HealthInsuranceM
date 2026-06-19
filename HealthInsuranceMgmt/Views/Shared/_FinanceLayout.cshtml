@@ -1,0 +1,54 @@
+﻿@* Views/Shared/_FinanceLayout.cshtml *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Finance Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-success border-right" id="sidebar-wrapper" style="width: 250px; min-height: 100vh;">
+            <div class="sidebar-heading text-white p-3 fw-bold">💰 Finance Panel</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-success text-white" asp-controller="FinanceDashboard" asp-action="Index">Dashboard</a>
+                <a class="list-group-item list-group-item-action bg-success text-white" asp-controller="FinanceClaims" asp-action="Index">Pending Claims</a>
+                <a class="list-group-item list-group-item-action bg-success text-white" asp-controller="FinanceClaims" asp-action="SettledClaims">Settled Claims</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Finance & Payment Portal</span>
+                    <partial name="_LoginPartial" />
+                </div>
+            </nav>
+
+            <!-- Main Body -->
+            <div class="container-fluid p-4">
+                @RenderBody()
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Validation Scripts -->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

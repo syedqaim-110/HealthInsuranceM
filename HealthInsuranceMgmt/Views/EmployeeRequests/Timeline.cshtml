@@ -1,0 +1,103 @@
+﻿@* Views/EmployeeRequests/Timeline.cshtml *@
+@model HealthInsuranceMgmt.Models.Entities.PolicyRequestDetail
+@{
+    ViewData["Title"] = "Request Timeline";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+
+    var assignedPolicy = ViewBag.AssignedPolicy as HealthInsuranceMgmt.Models.Entities.PolicyOnEmployee;
+}
+
+<div class="container mt-4">
+    <h2>Request Timeline</h2>
+    <p class="text-muted">Policy: <strong>@Model.Policy.PolicyName</strong> | Requested on: @Model.RequestDate.ToString("dd MMM yyyy")</p>
+    <hr />
+
+    <!-- Bootstrap Vertical Timeline -->
+    <ul class="list-group list-group-flush">
+
+        <!-- Step 1: Request Submitted -->
+        <li class="list-group-item d-flex justify-content-between align-items-start bg-light mb-2 shadow-sm">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold text-primary">1. Request Submitted</div>
+                <small>You submitted a request for this policy.</small>
+            </div>
+            <span class="badge bg-primary rounded-pill">@Model.RequestDate.ToString("dd MMM yyyy")</span>
+        </li>
+
+        <!-- Step 2: Under Review -->
+        <li class="list-group-item d-flex justify-content-between align-items-start bg-light mb-2 shadow-sm">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold text-warning">2. Under Review</div>
+                <small>Admin is reviewing your request.</small>
+            </div>
+            @if (Model.Status != "Pending")
+            {
+                <span class="badge bg-warning text-dark rounded-pill">Completed</span>
+            }
+            else
+            {
+                <span class="badge bg-warning text-dark rounded-pill">In Progress</span>
+            }
+        </li>
+
+        <!-- Step 3: Approved/Rejected -->
+        <li class="list-group-item d-flex justify-content-between align-items-start bg-light mb-2 shadow-sm">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold @(Model.Status == "Rejected" ? "text-danger" : "text-success")">
+                    3. @(Model.Status == "Rejected" ? "Rejected" : "Approved")
+                </div>
+                @if (Model.ApprovalDetail != null)
+                {
+                    <small>Remarks: @Model.ApprovalDetail.Remarks</small>
+                }
+                else
+                {
+                    <small>Waiting for Admin action.</small>
+                }
+            </div>
+            @if (Model.ApprovalDetail != null)
+            {
+                <span class="badge bg-info rounded-pill">@Model.ApprovalDetail.ApprovalDate.ToString("dd MMM yyyy")</span>
+            }
+        </li>
+
+        <!-- Step 4: Policy Assigned -->
+        @if (Model.Status == "Approved")
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-start bg-light mb-2 shadow-sm">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold text-success">4. Policy Assigned</div>
+                    @if (assignedPolicy != null)
+                    {
+                        <small>Valid till: @assignedPolicy.ExpiryDate.ToString("dd MMM yyyy")</small>
+                    }
+                </div>
+                @if (assignedPolicy != null)
+                {
+                    <span class="badge bg-success rounded-pill">@assignedPolicy.AssignedDate.ToString("dd MMM yyyy")</span>
+                }
+            </li>
+
+            <!-- Step 5: Claim Settled -->
+            <li class="list-group-item d-flex justify-content-between align-items-start bg-light mb-2 shadow-sm">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold text-success">5. Payment & Claim Settled</div>
+                    @if (assignedPolicy != null && assignedPolicy.Status == "Settled")
+                    {
+                        <small>Amount Credited: ₹@assignedPolicy.ClaimAmountCredited</small>
+                    }
+                    else
+                    {
+                        <small>Waiting for Finance Manager to settle payment.</small>
+                    }
+                </div>
+                @if (assignedPolicy != null && assignedPolicy.ClaimSettledDate != null)
+                {
+                    <span class="badge bg-success rounded-pill">@assignedPolicy.ClaimSettledDate.Value.ToString("dd MMM yyyy")</span>
+                }
+            </li>
+        }
+
+    </ul>
+    <a asp-action="MyRequests" class="btn btn-secondary mt-3">Back to My Requests</a>
+</div>

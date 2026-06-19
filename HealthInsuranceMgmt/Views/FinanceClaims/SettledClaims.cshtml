@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyOnEmployee>
+@{
+    ViewData["Title"] = "Settled Claims";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Settled Claims History</h2>
+    <hr />
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee</th>
+                <th>Policy Name</th>
+                <th>Amount Credited</th>
+                <th>Settled Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Employee.FirstName @item.Employee.LastName</td>
+                        <td>@item.Policy.PolicyName</td>
+                        <td>₹@item.ClaimAmountCredited</td>
+                        <td>@item.ClaimSettledDate.Value.ToString("dd MMM yyyy")</td>
+                        <td><span class="badge bg-success">@item.Status</span></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-danger">No settled claims found yet.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

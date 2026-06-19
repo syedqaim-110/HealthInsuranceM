@@ -1,0 +1,96 @@
+﻿@* Views/Reports/Index.cshtml *@
+@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyOnEmployee>
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>System Reports & Summaries</h2>
+    <hr />
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Companies</h5>
+                    <h2>@ViewBag.TotalCompanies</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Policies</h5>
+                    <h2>@ViewBag.TotalPolicies</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Employees</h5>
+                    <h2>@ViewBag.TotalEmployees</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Revenue (Premium)</h5>
+                    <h2>₹@ViewBag.TotalRevenue</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Billing Report Section -->
+    <h4>Billing / Claim Settlement Report</h4>
+
+    <!-- Date Filter Form -->
+    <form asp-action="Index" method="get" class="row g-3 mb-3">
+        <div class="col-md-3">
+            <label class="form-label">Start Date</label>
+            <input type="date" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">End Date</label>
+            <input type="date" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+        </div>
+        <div class="col-md-3 align-self-end">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee</th>
+                <th>Policy Name</th>
+                <th>Amount Credited</th>
+                <th>Settled Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Employee.FirstName @item.Employee.LastName</td>
+                        <td>@item.Policy.PolicyName</td>
+                        <td>₹@item.ClaimAmountCredited</td>
+                        <td>@item.ClaimSettledDate.Value.ToString("dd MMM yyyy")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-danger">No billing records found for this date range.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

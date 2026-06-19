@@ -1,0 +1,92 @@
+﻿@* Views/PolicyRequests/Index.cshtml *@
+@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyRequestDetail>
+@{
+    ViewData["Title"] = "Policy Requests";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Employee Policy Requests</h2>
+    <hr />
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee Name</th>
+                <th>Policy Requested</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Action Center</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Employee.FirstName @item.Employee.LastName<br />
+                            <small class="text-muted">@item.Employee.Email</small>
+                        </td>
+                        <td>@item.Policy.PolicyName</td>
+                        <td>@item.RequestDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Rejected</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <!-- Approve Form -->
+                                <form asp-action="Approve" method="post" class="d-flex gap-2 mb-2">
+                                    <input type="hidden" name="requestId" value="@item.Id" />
+                                    <input type="text" name="remarks" class="form-control form-control-sm" placeholder="Remarks (Optional)" required />
+                                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                                </form>
+
+                                <!-- Reject Form -->
+                                <form asp-action="Reject" method="post" class="d-flex gap-2">
+                                    <input type="hidden" name="requestId" value="@item.Id" />
+                                    <input type="text" name="remarks" class="form-control form-control-sm" placeholder="Reason for rejection" required />
+                                    <button type="submit" class="btn btn-sm btn-danger">Reject</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Reviewed by Admin. <br />
+                                    <small>Remarks: @(item.ApprovalDetail != null ? item.ApprovalDetail.Remarks : "N/A")</small>
+                                </span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-danger fw-bold">No policy requests found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

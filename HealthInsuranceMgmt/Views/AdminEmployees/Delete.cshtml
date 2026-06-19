@@ -1,0 +1,26 @@
+﻿@model HealthInsuranceMgmt.Models.Entities.EmpRegister
+@{
+    ViewData["Title"] = "Delete Employee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Delete Employee</h2>
+    <hr />
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <h4 class="text-danger">Are you sure you want to delete employee: <strong>@Model.FirstName @Model.LastName</strong>?</h4>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger mt-3">Confirm Delete</button>
+        <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>

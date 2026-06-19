@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyOnEmployee>
+@{
+    ViewData["Title"] = "Pending Claims";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Pending Insurance Claims</h2>
+    <hr />
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Employee</th>
+                <th>Policy Name</th>
+                <th>Premium to Pay</th>
+                <th>Assigned Date</th>
+                <th>Action (Settle Payment)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Employee.FirstName @item.Employee.LastName</td>
+                        <td>@item.Policy.PolicyName</td>
+                        <td>₹@item.Policy.PremiumAmount</td>
+                        <td>@item.AssignedDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            <form asp-action="SettlePayment" method="post" class="d-flex gap-2">
+                                <input type="hidden" name="assignId" value="@item.Id" />
+                                <input type="number" name="amountCredited" class="form-control form-control-sm" value="@item.Policy.PremiumAmount" required />
+                                <button type="submit" class="btn btn-sm btn-success">Settle & Close</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-success fw-bold">No pending claims. All payments are settled!</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

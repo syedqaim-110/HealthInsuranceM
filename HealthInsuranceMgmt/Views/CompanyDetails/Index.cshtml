@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HealthInsuranceMgmt.Models.Entities.CompanyDetail>
+@{
+    ViewData["Title"] = "Companies";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Insurance Companies</h2>
+<p><a asp-action="Create" class="btn btn-primary">+ Add New Company</a></p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CompanyName</td>
+                <td>@item.ContactNumber</td>
+                <td>@item.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

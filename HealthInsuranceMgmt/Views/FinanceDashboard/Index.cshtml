@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Finance Dashboard";
+    Layout = "~/Views/Shared/_FinanceLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1>Finance Manager Dashboard</h1>
+    <hr />
+    <p class="lead">Yahan aap un insurance policies ke payments settle kar sakte hain jinko Admin ne approve kar diya hai.</p>
+    <a asp-controller="FinanceClaims" asp-action="Index" class="btn btn-success">View Pending Claims</a>
+</div>

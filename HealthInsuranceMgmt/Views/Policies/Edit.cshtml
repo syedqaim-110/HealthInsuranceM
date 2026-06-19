@@ -1,0 +1,47 @@
+﻿@model HealthInsuranceMgmt.Models.Entities.Policy
+@{
+    ViewData["Title"] = "Edit Policy";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit Policy</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="PolicyName" class="form-label"></label>
+        <input asp-for="PolicyName" class="form-control" />
+        <span asp-validation-for="PolicyName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Insurance Company</label>
+        <select asp-for="CompanyDetailId" class="form-select" asp-items="ViewBag.CompanyList">
+            <option value="">-- Select Company --</option>
+        </select>
+        <span asp-validation-for="CompanyDetailId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PolicyType" class="form-label"></label>
+        <select asp-for="PolicyType" class="form-select">
+            <option value="Individual">Individual</option>
+            <option value="Family">Family Floater</option>
+            <option value="Senior Citizen">Senior Citizen</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SumInsured" class="form-label"></label>
+        <input asp-for="SumInsured" class="form-control" />
+        <span asp-validation-for="SumInsured" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PremiumAmount" class="form-label"></label>
+        <input asp-for="PremiumAmount" class="form-control" />
+        <span asp-validation-for="PremiumAmount" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Policy</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

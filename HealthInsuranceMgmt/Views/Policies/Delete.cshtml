@@ -1,0 +1,14 @@
+﻿@model HealthInsuranceMgmt.Models.Entities.Policy
+@{
+    ViewData["Title"] = "Delete Policy";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete Policy</h2>
+<h4 class="text-danger">Are you sure you want to delete <strong>@Model.PolicyName</strong>?</h4>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger mt-3">Confirm Delete</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+</form>

@@ -1,0 +1,112 @@
+﻿@* Views/Home/Index.cshtml *@
+@model object
+@* ↑ We're not passing a specific model to this page yet.
+   In later steps, we'll show dashboard stats here. *@
+
+@{
+    ViewData["Title"] = "Home Page";
+    @* ↑ This sets the page title that appears in the browser tab.
+       The _Layout.cshtml reads this via @ViewData["Title"]. *@
+}
+
+@* Hero Section — the big welcome banner *@
+<div class="jumbotron bg-primary text-white rounded-3 p-5 mb-4 shadow">
+    <div class="container">
+        <h1 class="display-4 fw-bold">🏥 Welcome to Medicare</h1>
+        <p class="lead">
+            Your organization's complete Health Insurance Management System.
+            Manage policies, process claims, and eliminate manual spreadsheets — all in one place.
+        </p>
+        <hr class="my-4 border-light" />
+        <p>Get started by registering as an employee or logging in to your account.</p>
+        <div class="d-flex gap-3">
+            <a class="btn btn-light btn-lg" asp-area="Identity" asp-page="/Account/Register">
+                Register Now
+            </a>
+            <a class="btn btn-outline-light btn-lg" asp-area="Identity" asp-page="/Account/Login">
+                Login
+            </a>
+        </div>
+    </div>
+</div>
+
+@* Feature Cards — highlight the three main user roles *@
+<div class="row text-center mb-5">
+
+    @* Admin Card *@
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">👤 Administrator</h3>
+                <p class="card-text">
+                    Manage insurance companies, policies, employee registrations,
+                    and approve/reject policy requests.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @* Employee Card *@
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">👨‍💼 Employee</h3>
+                <p class="card-text">
+                    Search available policies, submit insurance requests,
+                    track claim status, and update personal details.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @* Finance Manager Card *@
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title">💰 Finance Manager</h3>
+                <p class="card-text">
+                    Review approved bills, credit payment amounts,
+                    and close/settle claim requests.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@* How It Works Section *@
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">How the Process Works</h2>
+        <div class="d-flex justify-content-center">
+            <div class="text-center px-3">
+                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
+                     style="width:60px;height:60px;font-size:1.5rem;">
+                    1
+                </div>
+                <p class="mt-2"><strong>Employee Requests</strong><br />Policy request submitted</p>
+            </div>
+            <div class="text-center px-3">
+                <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center"
+                     style="width:60px;height:60px;font-size:1.5rem;">
+                    2
+                </div>
+                <p class="mt-2"><strong>Admin Reviews</strong><br />Request under review</p>
+            </div>
+            <div class="text-center px-3">
+                <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center"
+                     style="width:60px;height:60px;font-size:1.5rem;">
+                    3
+                </div>
+                <p class="mt-2"><strong>Policy Assigned</strong><br />Approved & assigned</p>
+            </div>
+            <div class="text-center px-3">
+                <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center"
+                     style="width:60px;height:60px;font-size:1.5rem;">
+                    4
+                </div>
+                <p class="mt-2"><strong>Claim Settled</strong><br />Payment credited</p>
+            </div>
+        </div>
+    </div>
+</div>

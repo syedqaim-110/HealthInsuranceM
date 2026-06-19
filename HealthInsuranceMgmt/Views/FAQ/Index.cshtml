@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HealthInsuranceMgmt.Models.Entities.FAQ>
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">Frequently Asked Questions (FAQ)</h2>
+    <hr />
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="text-end mb-4">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="Ask" class="btn btn-primary">Apna Sawal Puchiye (Ask Question)</a>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary">Login to Ask a Question</a>
+        }
+    </div>
+
+    <!-- Bootstrap Accordion for FAQ -->
+    <div class="accordion" id="faqAccordion">
+        @if (Model.Any())
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <div class="accordion-item mb-2 shadow-sm">
+                    <h2 class="accordion-header" id="heading@(i)">
+                        <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(i)" aria-expanded="false" aria-controls="collapse@(i)">
+                            <strong>Q: @item.Question</strong>
+                        </button>
+                    </h2>
+                    <div id="collapse@(i)" class="accordion-collapse collapse" aria-labelledby="heading@(i)" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p class="text-dark"><strong>Answer:</strong> @item.Answer</p>
+                            <small class="text-muted">Answered on: @item.AnsweredOn.Value.ToString("dd MMM yyyy")</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning text-center">No FAQs published yet. Please check back later.</div>
+        }
+    </div>
+</div>

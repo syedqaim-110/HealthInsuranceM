@@ -1,0 +1,51 @@
+﻿@* Views/Home/Feedback.cshtml *@
+@{
+    ViewData["Title"] = "Feedback";
+}
+
+<div class="container py-5">
+    <h1 class="mb-4">We Value Your Feedback</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <p class="lead">
+                        Your feedback helps us improve the Health Insurance Management System.
+                        Let us know about your experience!
+                    </p>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Overall Experience</label>
+                            <select class="form-select">
+                                <option value="">Select rating...</option>
+                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ Good</option>
+                                <option value="3">⭐⭐⭐ Average</option>
+                                <option value="2">⭐⭐ Below Average</option>
+                                <option value="1">⭐ Poor</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option value="">Select category...</option>
+                                <option>Policy Search</option>
+                                <option>Claim Process</option>
+                                <option>User Interface</option>
+                                <option>Performance</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Your Feedback</label>
+                            <textarea class="form-control" rows="5"
+                                      placeholder="Please describe your experience or suggestions..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

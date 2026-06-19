@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HealthInsuranceMgmt.Models.Entities.Policy>
+@{
+    ViewData["Title"] = "Policies";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Insurance Policies</h2>
+<p><a asp-action="Create" class="btn btn-primary">+ Add New Policy</a></p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Policy Name</th>
+            <th>Company</th>
+            <th>Sum Insured</th>
+            <th>Premium</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PolicyName</td>
+                <td>@(item.Company != null ? item.Company.CompanyName : "N/A")</td>
+                <td>₹@item.SumInsured</td>
+                <td>₹@item.PremiumAmount</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

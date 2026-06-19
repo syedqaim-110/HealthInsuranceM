@@ -1,0 +1,40 @@
+﻿@* Views/EmployeeRequests/MyPolicies.cshtml *@
+@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyOnEmployee>
+@{
+    ViewData["Title"] = "My Active Policies";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>My Active Insurance Policies</h2>
+    <hr />
+
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">@item.Policy.PolicyName</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Company:</strong> @item.Policy.Company.CompanyName</p>
+                            <p><strong>Sum Insured:</strong> ₹@item.Policy.SumInsured</p>
+                            <p><strong>Assigned Date:</strong> @item.AssignedDate.ToString("dd MMM yyyy")</p>
+                            <p><strong>Expiry Date:</strong> @item.ExpiryDate.ToString("dd MMM yyyy")</p>
+                            <span class="badge bg-info">Status: @item.Status</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-warning text-center">Aapke paas abhi koi active insurance policy nahi hai.</div>
+            </div>
+        }
+    </div>
+</div>

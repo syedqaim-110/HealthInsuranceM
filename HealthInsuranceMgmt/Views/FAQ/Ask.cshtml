@@ -1,0 +1,23 @@
+﻿@model HealthInsuranceMgmt.Models.Entities.FAQ
+@{
+    ViewData["Title"] = "Ask Question";
+}
+
+<div class="container mt-5 mb-5" style="max-width: 600px;">
+    <h2>Ask a Question</h2>
+    <hr />
+    <p class="text-muted">Agar aapko koi confusion hai insurance policies ke baare mein, toh apna sawal yahan puchiye. Admin aapko jaldi reply karega.</p>
+
+    <form asp-action="Ask" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Question" class="form-label fw-bold">Your Question</label>
+            <textarea asp-for="Question" class="form-control" rows="4" placeholder="Type your question here..."></textarea>
+            <span asp-validation-for="Question" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit Question</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to FAQs</a>
+    </form>
+</div>

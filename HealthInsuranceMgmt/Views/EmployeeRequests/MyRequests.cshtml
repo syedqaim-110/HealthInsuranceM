@@ -1,0 +1,63 @@
+﻿@using System.Linq
+@model IEnumerable<HealthInsuranceMgmt.Models.Entities.PolicyRequestDetail>
+@{
+    ViewData["Title"] = "My Requests";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>My Policy Requests & Status</h2>
+    <hr />
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Request Date</th>
+                <th>Policy Name</th>
+                <th>Company</th>
+                <th>Status</th>
+                <th>Admin Remarks</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RequestDate.ToString("dd MMM yyyy")</td>
+                        <td>@(item.Policy != null ? item.Policy.PolicyName : "N/A")</td>
+                        <td>@(item.Policy != null && item.Policy.Company != null ? item.Policy.Company.CompanyName : "N/A")</td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else if (item.Status == "Rejected")
+                            {
+                                <span class="badge bg-danger">Rejected</span>
+                            }
+                        </td>
+                        <td>
+                            @(item.ApprovalDetail != null ? item.ApprovalDetail.Remarks : "Waiting for review")
+                        </td>
+                        <td>
+                            <a asp-action="Timeline" asp-route-id="@item.Id" class="btn btn-sm btn-info">View Timeline</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-danger">Aapne abhi tak koi policy request nahi bheji hai.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
