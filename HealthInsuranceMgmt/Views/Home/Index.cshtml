@@ -1,111 +1,111 @@
-﻿@* Views/Home/Index.cshtml *@
-@model object
-@* ↑ We're not passing a specific model to this page yet.
-   In later steps, we'll show dashboard stats here. *@
-
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
-    @* ↑ This sets the page title that appears in the browser tab.
-       The _Layout.cshtml reads this via @ViewData["Title"]. *@
 }
 
-@* Hero Section — the big welcome banner *@
-<div class="jumbotron bg-primary text-white rounded-3 p-5 mb-4 shadow">
-    <div class="container">
-        <h1 class="display-4 fw-bold">🏥 Welcome to Medicare</h1>
-        <p class="lead">
-            Your organization's complete Health Insurance Management System.
-            Manage policies, process claims, and eliminate manual spreadsheets — all in one place.
+<!-- HERO SECTION -->
+<div class="relative bg-medBlue-900 text-white overflow-hidden py-24 lg:py-32 skew-pattern">
+    <div class="absolute inset-0 z-0 opacity-20">
+        <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=2070" class="w-full h-full object-cover" alt="Medical background">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-medBlue-900 via-medBlue-900/90 to-transparent z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+        <span class="inline-flex items-center gap-2 bg-medBlue-500/20 border border-medBlue-400/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+            <i class="fa-solid fa-shield-halved text-[10px]"></i> Complete Healthcare Management
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+            Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-medBlue-100 via-medBlue-400 to-emerald-300">Medicare Plus</span>
+        </h1>
+        <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Your organization's complete Health Insurance Management System. Manage policies, process claims, and eliminate manual spreadsheets — all in one secure place.
         </p>
-        <hr class="my-4 border-light" />
-        <p>Get started by registering as an employee or logging in to your account.</p>
-        <div class="d-flex gap-3">
-            <a class="btn btn-light btn-lg" asp-area="Identity" asp-page="/Account/Register">
-                Register Now
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a asp-area="Identity" asp-page="/Account/Register" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 px-8 py-3.5 rounded-lg font-bold transition-all shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-user-plus"></i> Register Now
             </a>
-            <a class="btn btn-outline-light btn-lg" asp-area="Identity" asp-page="/Account/Login">
-                Login
+            <a asp-area="Identity" asp-page="/Account/Login" class="bg-medBlue-600 hover:bg-medBlue-700 text-white px-8 py-3.5 rounded-lg font-bold transition-all shadow-lg flex items-center justify-center gap-2 border border-medBlue-400/30">
+                <i class="fa-solid fa-right-to-bracket"></i> Portal Access
             </a>
         </div>
     </div>
 </div>
 
-@* Feature Cards — highlight the three main user roles *@
-<div class="row text-center mb-5">
+<!-- FEATURE CARDS SECTION -->
+<div class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-xs font-bold text-medBlue-600 uppercase tracking-widest">User Roles</span>
+            <h2 class="text-3xl font-extrabold text-medBlue-900 mt-2">Built for Every Role</h2>
+            <p class="text-slate-500 mt-2">A unified portal catering to administrators, employees, and finance teams.</p>
+        </div>
 
-    @* Admin Card *@
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h3 class="card-title">👤 Administrator</h3>
-                <p class="card-text">
-                    Manage insurance companies, policies, employee registrations,
-                    and approve/reject policy requests.
-                </p>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Admin Card -->
+            <div class="bg-slate-50 rounded-2xl p-8 shadow-sm border border-slate-200/80 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 bg-medBlue-100 text-medBlue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-xl font-bold text-medBlue-900 mb-3">Administrator</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Manage insurance companies, policies, employee registrations, and approve or reject policy requests instantly.</p>
+            </div>
+
+            <!-- Employee Card -->
+            <div class="bg-slate-50 rounded-2xl p-8 shadow-sm border border-slate-200/80 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 class="text-xl font-bold text-medBlue-900 mb-3">Employee</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Search available policies, submit insurance requests, track claim status, and update personal details easily.</p>
+            </div>
+
+            <!-- Finance Card -->
+            <div class="bg-slate-50 rounded-2xl p-8 shadow-sm border border-slate-200/80 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <h3 class="text-xl font-bold text-medBlue-900 mb-3">Finance Manager</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Review approved bills, credit payment amounts directly, and close or settle claim requests securely.</p>
             </div>
         </div>
     </div>
-
-    @* Employee Card *@
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h3 class="card-title">👨‍💼 Employee</h3>
-                <p class="card-text">
-                    Search available policies, submit insurance requests,
-                    track claim status, and update personal details.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    @* Finance Manager Card *@
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h3 class="card-title">💰 Finance Manager</h3>
-                <p class="card-text">
-                    Review approved bills, credit payment amounts,
-                    and close/settle claim requests.
-                </p>
-            </div>
-        </div>
-    </div>
-
 </div>
 
-@* How It Works Section *@
-<div class="row mb-5">
-    <div class="col-12">
-        <h2 class="text-center mb-4">How the Process Works</h2>
-        <div class="d-flex justify-content-center">
-            <div class="text-center px-3">
-                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center"
-                     style="width:60px;height:60px;font-size:1.5rem;">
-                    1
-                </div>
-                <p class="mt-2"><strong>Employee Requests</strong><br />Policy request submitted</p>
+<!-- HOW IT WORKS SECTION -->
+<div class="py-20 bg-slate-50 border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-xs font-bold text-medBlue-600 uppercase tracking-widest">Workflow</span>
+            <h2 class="text-3xl font-extrabold text-medBlue-900 mt-2">How the Process Works</h2>
+            <p class="text-slate-500 mt-2">From request to settlement in four seamless steps.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <!-- Step 1 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200/60 relative">
+                <div class="w-14 h-14 bg-medBlue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                <h4 class="font-bold text-medBlue-900 text-lg">Employee Request</h4>
+                <p class="text-xs text-slate-500 mt-2">Policy request submitted by employee.</p>
+                <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-slate-200"></div>
             </div>
-            <div class="text-center px-3">
-                <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center"
-                     style="width:60px;height:60px;font-size:1.5rem;">
-                    2
-                </div>
-                <p class="mt-2"><strong>Admin Reviews</strong><br />Request under review</p>
+            <!-- Step 2 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200/60 relative">
+                <div class="w-14 h-14 bg-amber-500 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                <h4 class="font-bold text-medBlue-900 text-lg">Admin Reviews</h4>
+                <p class="text-xs text-slate-500 mt-2">Request goes under manual review.</p>
+                <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-slate-200"></div>
             </div>
-            <div class="text-center px-3">
-                <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center"
-                     style="width:60px;height:60px;font-size:1.5rem;">
-                    3
-                </div>
-                <p class="mt-2"><strong>Policy Assigned</strong><br />Approved & assigned</p>
+            <!-- Step 3 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200/60 relative">
+                <div class="w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                <h4 class="font-bold text-medBlue-900 text-lg">Policy Assigned</h4>
+                <p class="text-xs text-slate-500 mt-2">Approved and digitally assigned.</p>
+                <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-slate-200"></div>
             </div>
-            <div class="text-center px-3">
-                <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center"
-                     style="width:60px;height:60px;font-size:1.5rem;">
-                    4
-                </div>
-                <p class="mt-2"><strong>Claim Settled</strong><br />Payment credited</p>
+            <!-- Step 4 -->
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-200/60">
+                <div class="w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">4</div>
+                <h4 class="font-bold text-medBlue-900 text-lg">Claim Settled</h4>
+                <p class="text-xs text-slate-500 mt-2">Payment credited and closed.</p>
             </div>
         </div>
     </div>

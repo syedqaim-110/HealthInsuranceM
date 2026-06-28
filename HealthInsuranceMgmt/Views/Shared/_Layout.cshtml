@@ -1,67 +1,161 @@
-﻿@* Views/Shared/_Layout.cshtml *@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Health Insurance Management System</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Medicare Plus</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        medBlue: {
+                            50: '#f0f7fc', 100: '#e0eff9', 500: '#0073b6',
+                            600: '#005b94', 700: '#0b3a5c', 800: '#0f2c42', 900: '#0b1e33',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .expert-img-clip {
+            border-radius: 120px 120px 20px 120px;
+        }
+
+        .skew-pattern {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand text-info fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
-                    🏥 Medicare Insurance
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                        </li>
-                        <!-- NAYA FAQ LINK YAHAN ADD HUA HAI -->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="FAQ" asp-action="Index">FAQ</a>
-                        </li>
-                    </ul>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- MAIN NAVIGATION BAR -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Left Side: Logo -->
+                <div class="flex items-center flex-shrink-0 cursor-pointer" onclick="window.location.href='/'">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-medBlue-600 to-emerald-400 rounded-full flex items-center justify-center text-white mr-3 shadow-md shadow-medBlue-500/20">
+                        <i class="fa-solid fa-heart-pulse text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-medBlue-900 block leading-tight">MEDICARE<span class="text-medBlue-500">PLUS</span></span>
+                        <span class="text-[10px] tracking-widest uppercase font-semibold text-slate-400 block -mt-1">Corporate Health Portal</span>
+                    </div>
+                </div>
+
+                <!-- Mid: Navigation Items -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                    <a href="/" class="hover:text-medBlue-600 transition-colors">Home</a>
+                    <a href="/Home/About" class="text-medBlue-600 font-semibold border-b-2 border-medBlue-500 py-1">About Us</a>
+                    <a href="/Home/Contact" class="hover:text-medBlue-600 transition-colors">Contact</a>
+                    <a href="/FAQ" class="hover:text-medBlue-600 transition-colors">FAQ</a>
+                </div>
+
+                <!-- Right Side: Action Button -->
+                <div class="flex items-center space-x-4">
+                    <div class="hidden lg:flex flex-col text-right mr-2">
+                        <span class="text-xs text-slate-400 font-medium">Talk to an expert</span>
+                        <a href="tel:18006503163" class="text-sm font-bold text-medBlue-900 hover:text-medBlue-600 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-phone text-medBlue-500 text-xs"></i> 1 (800) 650-3163
+                        </a>
+                    </div>
+                    <!-- Login Partial Integrated -->
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        @RenderBody()
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container text-center py-3">
-            &copy; @DateTime.Now.Year - Health Insurance Management System |
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> |
-            <a asp-area="" asp-controller="Home" asp-action="Feedback">Feedback</a>
+    <!-- UNIFIED FOOTER -->
+    <footer class="bg-slate-900 text-white border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-9 h-9 bg-medBlue-600 rounded-full flex items-center justify-center text-white mr-3">
+                            <i class="fa-solid fa-heart-pulse text-base"></i>
+                        </div>
+                        <span class="text-lg font-black tracking-tight">MEDICARE<span class="text-medBlue-500">PLUS</span></span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Authorized Medicare health benefit exchange and claims management systems designed for modern businesses. Providing secure digital processing parameters under compliance constraints.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="/" class="hover:text-white transition-colors">Home Page</a></li>
+                        <li><a href="/Home/About" class="hover:text-white transition-colors">Our Story</a></li>
+                        <li><a href="/Home/Contact" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/FAQ" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">CONTACT</h4>
+                    <ul class="space-y-3 text-xs text-slate-400">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-map-location-dot mt-0.5 text-medBlue-500"></i><span>74, Paradise Road, Office 99, Sec-5, USA</span></li>
+                        <li class="flex items-center gap-2 font-semibold text-slate-300"><i class="fa-solid fa-phone-volume text-medBlue-500"></i><a href="tel:18006503163" class="hover:text-white">1 (800) 650-3163</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">SUBSCRIBE</h4>
+                    <p class="text-xs text-slate-400 mb-4">Subscribe to receive system announcements & policy renewal alerts.</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" id="newsletter-email" class="bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2 text-xs focus:ring-1 focus:ring-medBlue-500 outline-none w-full" placeholder="Email Address" required>
+                        <button type="submit" class="bg-medBlue-600 hover:bg-medBlue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors whitespace-nowrap">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between items-center pt-8 text-[11px] text-slate-500">
+                <p>&copy; @DateTime.Now.Year Medicare Plus Insurance Portal. Managed & Protected System under ISO/IEC Standards.</p>
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">Terms & Conditions</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- NOTIFICATION SYSTEM TOAST -->
+    <div id="calculator-toast" class="fixed bottom-6 right-6 z-50 bg-slate-950 text-white rounded-xl shadow-2xl border border-slate-800 p-4 max-w-sm flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0">
+        <div class="w-8 h-8 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <p id="toast-text" class="text-xs font-bold leading-normal">Subscription successful!</p>
+        </div>
+    </div>
 
-    <!-- Validation Scripts -->
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
-
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('calculator-toast');
+            const txt = document.getElementById('toast-text');
+            txt.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            document.getElementById('newsletter-email').value = '';
+            showToast("Subscription successful! You will receive system notifications.");
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
